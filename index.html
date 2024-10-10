@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Spotify Redirect</title>
+  <script type="text/javascript">
+    window.onload = function() {
+      const params = new URLSearchParams(window.location.hash.substring(1));
+      const queryString = params.toString();
+      const redirectUri = 'musictwin://auth#' + queryString;
+      window.location.href = redirectUri;
+    };
+  </script>
+</head>
+<body>
+  <p>Redirecting...</p>
+</body>
+</html>
