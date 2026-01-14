@@ -6,7 +6,19 @@
     window.onload = function() {
       const params = new URLSearchParams(window.location.search || window.location.hash.substring(1));
       const queryString = params.toString();
-      const redirectUri = 'musictwin://profile' + (queryString ? '?' + queryString : '');
+
+      // Check which app to redirect to based on 'state' parameter
+      const state = params.get('state') || '';
+
+      let redirectUri;
+      if (state.startsWith('mixaroo_')) {
+        // Redirect to Mixaroo web app
+        redirectUri = 'https://mixaroo.vercel.app/api/spotify/callback' + (queryString ? '?' + queryString : '');
+      } else {
+        // Default: redirect to MusicTwin mobile app (original behavior)
+        redirectUri = 'musictwin://profile' + (queryString ? '?' + queryString : '');
+      }
+
       window.location.href = redirectUri;
     };
   </script>
